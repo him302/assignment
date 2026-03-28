@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* Allow manually toggling the "dark" class in Tailwind v4 */
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-indigo-650: #4338ca;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    @apply bg-gray-50 text-gray-950 transition-colors duration-200;
+  }
+
+  .dark body {
+    @apply bg-gray-950 text-gray-50;
+  }
+}
+
+/* Base Component Global Overrides for elegant dark rendering without rewriting all classes */
+@layer components {
+  .dark .bg-white {
+    background-color: #111827 !important;
+    /* bg-gray-900 */
+    border-color: #1f2937 !important;
+    /* border-gray-800 */
+    color: #f9fafb !important;
+    /* text-gray-50 */
+  }
+
+  .dark .text-gray-900,
+  .dark .text-gray-800 {
+    color: #f9fafb !important;
+  }
+
+  .dark .text-gray-600,
+  .dark .text-gray-500 {
+    color: #9ca3af !important;
+  }
+
+  .dark .border-gray-200,
+  .dark .border-gray-100,
+  .dark .border {
+    border-color: #1f2937 !important;
+  }
+
+  .dark .bg-gray-50 {
+    background-color: #1f2937 !important;
+    /* convert gray-50 hover states to gray-800 */
+  }
+}
+
+.glass-panel {
+  @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)];
+}
+
+.dark .glass-panel {
+  @apply border-gray-800/60 shadow-[0_8px_30px_rgb(0, 0, 0, 0.2)] bg-gray-950/60 !important;
+}

@@ -1,0 +1,6 @@
+# Root ignores
+.env
+.idea/
+.vscode/
+*.log
+*.sql
