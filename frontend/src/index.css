@@ -1,62 +1,74 @@
 @import "tailwindcss";
 
-/* Allow manually toggling the "dark" class in Tailwind v4 */
-@custom-variant dark (&:is(.dark *));
-
-@theme {
-  --color-indigo-650: #4338ca;
+:root {
+  --app-bg: #f9fafb;
+  /* Tailwind gray-50 */
+  --app-text: #030712;
+  /* Tailwind gray-950 */
+  --card-bg: #ffffff;
+  --card-border: #f3f4f6;
+  /* Tailwind gray-100 */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
 }
 
-@layer base {
-  body {
-    margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    @apply bg-gray-50 text-gray-950 transition-colors duration-200;
-  }
-
-  .dark body {
-    @apply bg-gray-950 text-gray-50;
-  }
+.dark {
+  --app-bg: #030712;
+  /* Tailwind gray-950 */
+  --app-text: #f9fafb;
+  /* Tailwind gray-50 */
+  --card-bg: #111827;
+  /* Tailwind gray-900 */
+  --card-border: #1f2937;
+  /* Tailwind gray-800 */
+  --glass-bg: rgba(17, 24, 39, 0.7);
+  --glass-border: rgba(31, 41, 55, 0.6);
+  --glass-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Base Component Global Overrides for elegant dark rendering without rewriting all classes */
-@layer components {
-  .dark .bg-white {
-    background-color: #111827 !important;
-    /* bg-gray-900 */
-    border-color: #1f2937 !important;
-    /* border-gray-800 */
-    color: #f9fafb !important;
-    /* text-gray-50 */
-  }
-
-  .dark .text-gray-900,
-  .dark .text-gray-800 {
-    color: #f9fafb !important;
-  }
-
-  .dark .text-gray-600,
-  .dark .text-gray-500 {
-    color: #9ca3af !important;
-  }
-
-  .dark .border-gray-200,
-  .dark .border-gray-100,
-  .dark .border {
-    border-color: #1f2937 !important;
-  }
-
-  .dark .bg-gray-50 {
-    background-color: #1f2937 !important;
-    /* convert gray-50 hover states to gray-800 */
-  }
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .glass-panel {
-  @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)];
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
 }
 
-.dark .glass-panel {
-  @apply border-gray-800/60 shadow-[0_8px_30px_rgb(0, 0, 0, 0.2)] bg-gray-950/60 !important;
+/* Base Overrides for existing components to adapt automatically to dark mode */
+.dark .bg-white {
+  background-color: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+  color: var(--app-text) !important;
+}
+
+.dark .text-gray-900,
+.dark .text-gray-800 {
+  color: #f3f4f6 !important;
+  /* gray-100 */
+}
+
+.dark .text-gray-600,
+.dark .text-gray-500 {
+  color: #9ca3af !important;
+  /* gray-400 */
+}
+
+.dark .border-gray-200,
+.dark .border-gray-100 {
+  border-color: var(--card-border) !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #1f2937 !important;
+  /* hover rows adaptation */
 }
